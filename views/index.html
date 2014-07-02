@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>{{title}}</title>
+  <link rel="stylesheet" type="text/css" href="css/elise.css">
+</head>
+<style type="text/css">
+
+  .content{
+  /*
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px 20px;
+    */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  body{
+    background-color: #f5f5f5;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+  .erow{
+    min-height:50%;
+    height: 50%;
+    margin: 0;
+  }
+  .editor-content{
+    position: relative;
+    height: 100%;
+  }
+  .editor{
+    position: absolute !important;
+    top: 10px;
+    bottom: 0;
+    right: 0;
+    left: 0;
+  }
+
+</style>
+<body>
+  <div class="content">
+  <div class="erow">
+    <div class="ebox6 editor-content">
+      <div class="editor" id="editor-html">
+        
+ &lt;!-- This for HTML code --&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h1&gt;Hello World&lt;/h1&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+      </div>
+    </div>
+    <div class="ebox6 editor-content">
+      <div class="editor"  id="editor-css">
+       /* This for CSS code*/
+     </div>
+   </div>
+ </div>
+ <div class="erow">
+  <div class="ebox12 editor-content">
+    <div class="editor" id="editor-js">
+      /**
+      * This for Javascript Code 
+      */
+    </div>
+  </div>
+</div>
+<!-- scripts -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+<script src="src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="js/elise.js" ></script>
+
+<script type="text/javascript">
+// create the editor
+var editor_html = ace.edit("editor-html");
+editor_html.setTheme("ace/theme/monokai");
+editor_html.getSession().setMode("ace/mode/html");
+
+var editor_css = ace.edit("editor-css");
+editor_css.setTheme("ace/theme/monokai");
+editor_css.getSession().setMode("ace/mode/css");
+
+var editor_js = ace.edit("editor-js");
+editor_js.setTheme("ace/theme/monokai");
+editor_js.getSession().setMode("ace/mode/javascript");
+
+$(document).on('ready',function(){
+
+});
+</script>
+</body>
+
+</html>

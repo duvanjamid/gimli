@@ -1,0 +1,19 @@
+{
+  "name": "Editor",
+  "version": "0.0.0",
+  "description": "Editor projact for nodejs",
+  "main": "app.js",
+  "dependencies": {
+    "consolidate": "~0.9.1",
+    "express": ">=3.x",
+    "swig": "~0.14.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "",
+  "author": "Duvan Jamid Vargas <duvanjamidvc@gmail.com>",
+  "license": "MIT Licence",
+  "private": true
+}
