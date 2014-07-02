@@ -39,39 +39,47 @@
     bottom: 0;
     right: 0;
     left: 0;
+    width: 100%;
   }
 
 </style>
 <body>
   <div class="content">
-  <div class="erow">
-    <div class="ebox6 editor-content">
-      <div class="editor" id="editor-html">
-        
- &lt;!-- This for HTML code --&gt;
-&lt;html&gt;
-    &lt;head&gt;
-        &lt;title&gt;&lt;/title&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        &lt;h1&gt;Hello World&lt;/h1&gt;
-    &lt;/body&gt;
-&lt;/html&gt;
-      </div>
-    </div>
-    <div class="ebox6 editor-content">
+    <div class="erow">
+      <div class="ebox6 editor-content">
+        <div class="editor" id="editor-html">
+
+         &lt;!-- This for HTML code --&gt;
+         &lt;html&gt;
+         &lt;head&gt;
+         &lt;title&gt;&lt;/title&gt;
+         &lt;/head&gt;
+         &lt;body&gt;
+         &lt;h1&gt;Hello World&lt;/h1&gt;
+         &lt;/body&gt;
+         &lt;/html&gt;
+       </div>
+     </div>
+     <div class="ebox6 editor-content">
       <div class="editor"  id="editor-css">
        /* This for CSS code*/
      </div>
    </div>
  </div>
  <div class="erow">
-  <div class="ebox12 editor-content">
+  <div class="ebox6 editor-content">
     <div class="editor" id="editor-js">
       /**
       * This for Javascript Code 
       */
     </div>
+  </div>
+  <div class="ebox6 editor-content">
+    <iframe class="editor" id="editor-preview">
+      /**
+      * This for Javascript Code 
+      */
+    </iframe>
   </div>
 </div>
 <!-- scripts -->
@@ -85,17 +93,44 @@ var editor_html = ace.edit("editor-html");
 editor_html.setTheme("ace/theme/monokai");
 editor_html.getSession().setMode("ace/mode/html");
 
+
 var editor_css = ace.edit("editor-css");
 editor_css.setTheme("ace/theme/monokai");
 editor_css.getSession().setMode("ace/mode/css");
+
+
 
 var editor_js = ace.edit("editor-js");
 editor_js.setTheme("ace/theme/monokai");
 editor_js.getSession().setMode("ace/mode/javascript");
 
-$(document).on('ready',function(){
 
+editor_html.getSession().on('change', function(e) {
+  loadCode(editor_js.getValue(),editor_css.getValue(),editor_html.getValue());
 });
+editor_css.getSession().on('change', function(e) {
+  loadCode(editor_js.getValue(),editor_css.getValue(),editor_html.getValue());
+});
+editor_js.getSession().on('change', function(e) {
+  
+  $.each(editor_js.getSession().getAnnotations(),function(i,e){
+    if(e.type==="error")
+      return false;
+  });
+  loadCode(editor_js.getValue(),editor_css.getValue(),editor_html.getValue());
+});
+var loadCode=function(js_text,css_text,html_text){
+  var _script= $('<script/>',{
+    'type':'text/javascript'
+  }).text(js_text);
+  var _style= $('<style/>',{
+    'type':'text/css'
+  }).text(css_text);
+  $('#editor-preview').contents().find('body').html(html_text);
+
+  $('#editor-preview').contents().find('head').html("").append(_script,_style);
+
+}
 </script>
 </body>
 
